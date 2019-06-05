@@ -1,0 +1,2 @@
+# SkateEveryDayTray
+Windows trayIcon
