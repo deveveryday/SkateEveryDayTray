@@ -21,17 +21,17 @@ namespace SkateEveryDayTrayWin
             InitializeComponent();
 
             
-            icon.Icon = new System.Drawing.Icon("./skate.ico");
+            icon.Icon = new System.Drawing.Icon("./skate_.ico");
             icon.Visible = true;
-            icon.BalloonTipText = "Just Skate every day";
-            icon.BalloonTipTitle = "Skate!";
+            icon.BalloonTipText = "Try to skate today";
+            icon.BalloonTipTitle = "SKATEeveryday";
             icon.BalloonTipIcon = ToolTipIcon.Warning;
             icon.ShowBalloonTip(1000);
             icon.MouseUp += Icon_MouseUp;
             icon.DoubleClick += Icon_DoubleClick;
             icon.MouseClick += Icon_MouseClick;
             icon.BalloonTipClicked += Icon_BalloonTipClicked;
-            icon.Text = "SkateEveryDay!";
+            icon.Text = "SKATEeveryday!";
 
             this.Hide();
             Opacity = 0;
@@ -43,13 +43,15 @@ namespace SkateEveryDayTrayWin
         private void Icon_BalloonTipClicked(object sender, EventArgs e)
         {
 
-            Process.Start("http://www.skateeveryday.com.br");
         }
 
         private void Icon_MouseClick(object sender, MouseEventArgs e)
         {
+            icon.Visible = true;
+
             if (e.Button == MouseButtons.Right)
             {
+                icon.Icon = new System.Drawing.Icon("./skate_.ico");
                 icon.BalloonTipText = "Dont forget the PortalHoras shit";
                 icon.BalloonTipTitle = "Skate!";
                 icon.BalloonTipIcon = ToolTipIcon.Error;
@@ -57,6 +59,7 @@ namespace SkateEveryDayTrayWin
             }
             else//left or middle click
             {
+                icon.Icon = new System.Drawing.Icon("./skate.ico");
                 icon.BalloonTipText = "Go to the SkateEveryDay.com.br";
                 icon.BalloonTipTitle = "Skate!";
                 icon.BalloonTipIcon = ToolTipIcon.Info;
@@ -94,11 +97,12 @@ namespace SkateEveryDayTrayWin
             }
             else
             {
-                icon.BalloonTipText = "Just Skate every day";
+                icon.BalloonTipText = "Try to go skate today";
                 icon.BalloonTipTitle = "Skate!";
                 icon.BalloonTipIcon = ToolTipIcon.Warning;
             }
 
+            icon.Visible = true;
             icon.ShowBalloonTip(1000);
         }
     }
