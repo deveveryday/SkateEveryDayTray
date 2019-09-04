@@ -79,30 +79,33 @@ namespace SkateEveryDayTrayWin
 
         private void Icon_MouseClick(object sender, MouseEventArgs e)
         {
-            icon.Icon = NextIcon();
+            
 
             icon.BalloonTipText = tricks[new Random().Next(0, tricks.Length)]; //"Go to the SkateEveryDay.com.br";
             icon.BalloonTipTitle = "Skate!";
             icon.BalloonTipIcon = ToolTipIcon.Info;
             icon.ShowBalloonTip(1000);
 
-            AnimeIcon(500, 20);
-
-            //if (e.Button == MouseButtons.Right)
-            //{
-
-            //    icon.BalloonTipText = "Dont forget the PortalHoras shit";
-            //    icon.BalloonTipTitle = "Skate!";
-            //    icon.BalloonTipIcon = ToolTipIcon.Error;
-            //    icon.ShowBalloonTip(1000);
-            //}
-            //else//left or middle click
-            //{
-            //    icon.BalloonTipText = tricks[new Random().Next(0, 13)]; //"Go to the SkateEveryDay.com.br";
-            //    icon.BalloonTipTitle = "Skate!";
-            //    icon.BalloonTipIcon = ToolTipIcon.Info;
-            //    icon.ShowBalloonTip(1000);
-            //}
+            
+            if (e.Button == MouseButtons.Right)
+            {
+                AnimeIcon(200, 100);
+                icon.Icon = NextIcon();
+                //icon.BalloonTipText = "Dont forget the PortalHoras shit";
+                //icon.BalloonTipTitle = "Skate!";
+                //icon.BalloonTipIcon = ToolTipIcon.Error;
+                //icon.ShowBalloonTip(1000);
+            }
+            else//left or middle click
+            {
+                AnimeIcon(500, 20);
+                icon.Icon = NextIcon();
+                
+                //icon.BalloonTipText = tricks[new Random().Next(0, 13)]; //"Go to the SkateEveryDay.com.br";
+                //icon.BalloonTipTitle = "Skate!";
+                //icon.BalloonTipIcon = ToolTipIcon.Info;
+                //icon.ShowBalloonTip(1000);
+            }
         }
 
         private void Icon_DoubleClick(object sender, EventArgs e)
@@ -173,9 +176,9 @@ namespace SkateEveryDayTrayWin
             icon.Icon = NextIcon();
         }
 
-        private System.Drawing.Icon NextIcon()
+        private System.Drawing.Icon NextIcon(string icoName = "skate", int ini = 1, int end = 21)
         {
-            return new System.Drawing.Icon($"./skate{new Random().Next(1, 21)}.ico");
+            return new System.Drawing.Icon($"./{icoName}{new Random().Next(ini, end)}.ico");
         }
 
         private void AnimeIcon(int milliseconds = 1000, int repetitions = 10)
@@ -184,6 +187,15 @@ namespace SkateEveryDayTrayWin
             {
                 Thread.Sleep(milliseconds);
                 icon.Icon = NextIcon();
+            }
+        }
+
+        private void FlipIcon(int milliseconds = 1000, int repetitions = 10)
+        {
+            for (int i = 0; i < repetitions; i++)
+            {
+                Thread.Sleep(milliseconds);
+                icon.Icon = NextIcon("skateflip", 1, 2);
             }
         }
     }
