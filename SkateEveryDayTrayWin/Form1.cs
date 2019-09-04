@@ -86,12 +86,7 @@ namespace SkateEveryDayTrayWin
             icon.BalloonTipIcon = ToolTipIcon.Info;
             icon.ShowBalloonTip(1000);
 
-            Thread.Sleep(1000);
-            icon.Icon = NextIcon();
-            Thread.Sleep(2000);
-            icon.Icon = NextIcon();
-            Thread.Sleep(3000);
-            icon.Icon = NextIcon();
+            AnimeIcon(500, 20);
 
             //if (e.Button == MouseButtons.Right)
             //{
@@ -140,7 +135,6 @@ namespace SkateEveryDayTrayWin
                 icon.BalloonTipIcon = ToolTipIcon.Error;
 
                 timer2.Interval = 180000;
-                
             }
             else if (DateTime.Now.Hour > 11 && DateTime.Now.Hour < 12)
             {
@@ -182,6 +176,15 @@ namespace SkateEveryDayTrayWin
         private System.Drawing.Icon NextIcon()
         {
             return new System.Drawing.Icon($"./skate{new Random().Next(1, 21)}.ico");
+        }
+
+        private void AnimeIcon(int milliseconds = 1000, int repetitions = 10)
+        {
+            for(int i = 0; i < repetitions; i++)
+            {
+                Thread.Sleep(milliseconds);
+                icon.Icon = NextIcon();
+            }
         }
     }
 }
