@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace SkateEveryDayTrayWin
@@ -8,8 +9,6 @@ namespace SkateEveryDayTrayWin
     {
 
         NotifyIcon icon = new NotifyIcon();
-        int counterIco = 0;
-        int counterIcoTick = 0;
 
         string[] tricks = new string[]{
                             "VarialFlip",
@@ -38,7 +37,7 @@ namespace SkateEveryDayTrayWin
             InitializeComponent();
 
 
-            icon.Icon = new System.Drawing.Icon("./skate15.ico");
+            icon.Icon = new System.Drawing.Icon("./skate18.ico");
             icon.Visible = true;
             icon.BalloonTipText = "Try to skate today";
             icon.BalloonTipTitle = "SKATEeveryday";
@@ -80,13 +79,19 @@ namespace SkateEveryDayTrayWin
 
         private void Icon_MouseClick(object sender, MouseEventArgs e)
         {
-            counterIco++;
-            icon.Icon = new System.Drawing.Icon($"./skate{counterIco}.ico");
+            icon.Icon = NextIcon();
 
             icon.BalloonTipText = tricks[new Random().Next(0, tricks.Length)]; //"Go to the SkateEveryDay.com.br";
             icon.BalloonTipTitle = "Skate!";
             icon.BalloonTipIcon = ToolTipIcon.Info;
             icon.ShowBalloonTip(1000);
+
+            Thread.Sleep(1000);
+            icon.Icon = NextIcon();
+            Thread.Sleep(2000);
+            icon.Icon = NextIcon();
+            Thread.Sleep(3000);
+            icon.Icon = NextIcon();
 
             //if (e.Button == MouseButtons.Right)
             //{
@@ -103,9 +108,6 @@ namespace SkateEveryDayTrayWin
             //    icon.BalloonTipIcon = ToolTipIcon.Info;
             //    icon.ShowBalloonTip(1000);
             //}
-
-            if (counterIco > 17)
-                counterIco = 0;
         }
 
         private void Icon_DoubleClick(object sender, EventArgs e)
@@ -136,6 +138,9 @@ namespace SkateEveryDayTrayWin
                 icon.BalloonTipText = "Dont forget the PortalHoras shit";
                 icon.BalloonTipTitle = "Start the Dev day!";
                 icon.BalloonTipIcon = ToolTipIcon.Error;
+
+                timer2.Interval = 180000;
+                
             }
             else if (DateTime.Now.Hour > 11 && DateTime.Now.Hour < 12)
             {
@@ -143,6 +148,8 @@ namespace SkateEveryDayTrayWin
                 icon.BalloonTipText = "Dont forget the PortalHoras shit";
                 icon.BalloonTipTitle = "Dev!";
                 icon.BalloonTipIcon = ToolTipIcon.Error;
+
+                timer2.Interval = 120000;
             }
             else if (DateTime.Now.Hour > 16 && DateTime.Now.Hour < 18)
             {
@@ -150,13 +157,17 @@ namespace SkateEveryDayTrayWin
                 icon.BalloonTipText = "Dont forget the PortalHoras shit";
                 icon.BalloonTipTitle = "Ending the Dev day!";
                 icon.BalloonTipIcon = ToolTipIcon.Error;
+
+                timer2.Interval = 60000;
             }
             else
             {
                 icon.Icon = new System.Drawing.Icon("./skate4.ico");
                 icon.BalloonTipText = $"Try to land a {tricks[new Random().Next(0, tricks.Length)]} today";
-                icon.BalloonTipTitle = "Skate!";
+                icon.BalloonTipTitle = "SKATEeveryday";
                 icon.BalloonTipIcon = ToolTipIcon.Warning;
+
+                timer2.Interval = 180000;   
             }
 
             icon.Visible = true;
@@ -165,12 +176,12 @@ namespace SkateEveryDayTrayWin
 
         private void Timer2_Tick(object sender, EventArgs e)
         {
-            counterIcoTick++;
+            icon.Icon = NextIcon();
+        }
 
-            icon.Icon = new System.Drawing.Icon($"./skate{counterIcoTick}.ico");
-
-            if (counterIcoTick > 17)
-                counterIcoTick = 0;
+        private System.Drawing.Icon NextIcon()
+        {
+            return new System.Drawing.Icon($"./skate{new Random().Next(1, 21)}.ico");
         }
     }
 }
