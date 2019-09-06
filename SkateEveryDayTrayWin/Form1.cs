@@ -59,9 +59,7 @@ namespace SkateEveryDayTrayWin
 
         private void Icon_BalloonTipClicked(object sender, EventArgs e)
         {
-            
-
-
+            AnimeIcon(200, 30);
         }
 
         private void Icon_DoubleClick1(object sender, EventArgs e)
@@ -89,7 +87,7 @@ namespace SkateEveryDayTrayWin
             
             if (e.Button == MouseButtons.Right)
             {
-                AnimeIcon(200, 100);
+                AnimeIcon(200, 10);
                 icon.Icon = NextIcon();
                 //icon.BalloonTipText = "Dont forget the PortalHoras shit";
                 //icon.BalloonTipTitle = "Skate!";
@@ -98,7 +96,7 @@ namespace SkateEveryDayTrayWin
             }
             else//left or middle click
             {
-                AnimeIcon(500, 20);
+                AnimeIcon(500, 5);
                 icon.Icon = NextIcon();
                 
                 //icon.BalloonTipText = tricks[new Random().Next(0, 13)]; //"Go to the SkateEveryDay.com.br";
